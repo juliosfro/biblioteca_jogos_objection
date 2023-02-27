@@ -9,7 +9,7 @@ async function create (payload: CreateUsuario): Promise<Usuario> {
     });
 }
 
-async function getAll() {
+async function getAll(): Promise<Usuario[]>  {
     return Usuario.transaction(async (transacting) => {
         return await Usuario.query(transacting);
     });
