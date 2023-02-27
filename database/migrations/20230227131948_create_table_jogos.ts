@@ -13,7 +13,7 @@ exports.up = async function up(knex: Knex) {
             .notNullable()
             .unsigned()
             .references('id')
-            .inTable('jogos');
+            .inTable('categoria_jogos');
 
         table.timestamps(false, true);
         table.dateTime('deleted_at')
