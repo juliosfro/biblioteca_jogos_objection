@@ -6,7 +6,12 @@ async function create(payload: CreateJogoAdquirido): Promise<JogoAdquirido> {
         return await JogoAdquirido
             .query(transacting)
             .insertAndFetch(payload)
-            .withGraphFetched('jogo.categoria');
+            .withGraphFetched(
+                `usuario
+                .jogos_adquiridos
+                .jogo
+                .categoria`
+            );
     });
 }
 
