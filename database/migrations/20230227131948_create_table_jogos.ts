@@ -10,8 +10,8 @@ exports.up = async function up(knex: Knex) {
             .unique('nome_jogos_unique_constraint');
         
         table.bigInteger('id_categoria_jogo')
-            .notNullable()
             .unsigned()
+            .notNullable()
             .references('id')
             .inTable('categoria_jogos');
 
