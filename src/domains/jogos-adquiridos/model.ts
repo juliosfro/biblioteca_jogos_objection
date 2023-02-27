@@ -1,54 +1,56 @@
-import bcrypt from 'bcryptjs';
 import { AnyQueryBuilder, ModelOptions, QueryContext } from 'objection';
-import JogoAdquirido from '~/domains/jogos-adquiridos/model';
+import Jogo from '~/domains/jogos/model';
+import Usuario from '~/domains/usuarios/model';
 import BaseModel from '~/models';
 
-const BCRYPT_SALT_LENGTH = Number(process.env.BCRYPT_SALT_LENGTH);
-
-class Usuario extends BaseModel {
+class JogoAdquirido extends BaseModel {
 
     static get tableName() {
-        return 'usuarios';
+        return 'jogos_adquiridos';
     }
 
     static get idColumn() {
-        return 'id';
+        return 'id_usuario';
     }
 
-    public id!: number;
-    public nome!: string;
-    public email!: string;
-    public senha!: string;
+    public id_usuario!: number;
+    public id_jogo!: number;
     public created_at?: Date;
     public updated_at?: Date;
 
     get $hiddenFields() {
         return [
-            'senha',
             'created_at',
             'updated_at',
             'deleted_at'
         ];
     }
 
-    $beforeInsert(queryContext: QueryContext): Promise<Usuario> | void {
+    $beforeInsert(queryContext: QueryContext): Promise<JogoAdquirido> | void {
         super.$beforeInsert(queryContext);
-        this.senha = bcrypt.hashSync(this.senha, BCRYPT_SALT_LENGTH);
     }
 
-    $beforeUpdate(options: ModelOptions & { old: Usuario }, queryContext: QueryContext): Promise<any> | void {
+    $beforeUpdate(options: ModelOptions & { old: JogoAdquirido }, queryContext: QueryContext): Promise<any> | void {
         super.$beforeUpdate(options, queryContext);
         this.updated_at = new Date();
     }
 
     static get relationMappings() {
         return {
-            jogos_adquiridos: {
-                relation: Usuario.HasManyRelation,
-                modelClass: JogoAdquirido,
+            usuario: {
+                relation: JogoAdquirido.HasOneRelation,
+                modelClass: Usuario,
                 join: {
                     from: 'jogos_adquiridos.id_usuario',
                     to: 'usuarios.id',
+                },
+            },
+            jogo: {
+                relation: JogoAdquirido.HasOneRelation,
+                modelClass: Jogo,
+                join: {
+                    from: 'jogos_adquiridos.id_jogo',
+                    to: 'jogos.id',
                 },
             },
         };
@@ -70,4 +72,4 @@ class Usuario extends BaseModel {
 
 }
 
-export default Usuario;
+export default JogoAdquirido;
