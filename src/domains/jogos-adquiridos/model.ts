@@ -20,6 +20,8 @@ class JogoAdquirido extends BaseModel {
 
     get $hiddenFields() {
         return [
+            'id_usuario',
+            'id_jogo',
             'created_at',
             'updated_at',
             'deleted_at'
