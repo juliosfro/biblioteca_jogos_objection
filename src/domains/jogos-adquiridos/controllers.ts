@@ -17,6 +17,19 @@ async function create(request: Request, response: Response, next: NextFunction) 
     }
 }
 
+async function getAll(_request: Request, response: Response, next: NextFunction) {
+    try {
+        const jogosAdquiridos = await service.getAll();
+        response
+            .status(200)
+            .json(jogosAdquiridos);
+
+    } catch (error) {
+        next(error);
+    }
+}
+
 export default {
-    create
+    create,
+    getAll
 };

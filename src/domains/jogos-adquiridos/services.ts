@@ -15,6 +15,20 @@ async function create(payload: CreateJogoAdquirido): Promise<JogoAdquirido> {
     });
 }
 
+async function getAll(): Promise<JogoAdquirido[]> {
+    return JogoAdquirido.transaction(async (transacting) => {
+        return await JogoAdquirido
+            .query(transacting)
+            .withGraphFetched(
+                `usuario
+                .jogos_adquiridos
+                .jogo
+                .categoria`
+            );
+    });
+}
+
 export {
-    create
+    create,
+    getAll
 };
