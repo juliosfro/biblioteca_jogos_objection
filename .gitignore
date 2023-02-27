@@ -1,0 +1,6 @@
+build
+node_modules
+mysql
+.env
+yarn.lock
+yarn-error.log

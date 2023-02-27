@@ -1,0 +1,22 @@
+{
+    "workbench.iconTheme": "vscode-icons",
+    "git.autofetch": true,
+    "eslint.format.enable": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "diffEditor.codeLens": true,
+    "editor.formatOnType": true,
+    "npm.keybindingsChangedWarningShown": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "files.trimFinalNewlines": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true,
+        "source.fixAll.eslint": true
+    },
+    "explorer.compactFolders": false,
+    "editor.rulers": [
+        120
+    ],
+}
