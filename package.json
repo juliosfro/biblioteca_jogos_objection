@@ -26,7 +26,7 @@
     "docker:down": "docker-compose down",
     "migrate:latest": "babel-node ./node_modules/.bin/knex migrate:latest --knexfile ./database/knexfile.ts",
     "migrate:make": "knex migrate:make --knexfile ./database/knexfile.ts -x ts",
-    "migrate:rollback": "npx sequelize-cli db:migrate:undo"
+    "migrate:rollback": "babel-node ./node_modules/.bin/knex --knexfile ./database/knexfile.ts migrate:rollback"
   },
   "devDependencies": {
     "@babel/cli": "^7.20.7",
