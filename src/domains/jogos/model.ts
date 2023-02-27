@@ -21,7 +21,7 @@ class Jogo extends BaseModel {
 
     get $hiddenFields() {
         return [
-            'senha',
+            'id_categoria_jogo',
             'created_at',
             'updated_at',
             'deleted_at'
