@@ -19,12 +19,7 @@ async function getAll(): Promise<JogoAdquirido[]> {
     return JogoAdquirido.transaction(async (transacting) => {
         return await JogoAdquirido
             .query(transacting)
-            .withGraphFetched(
-                `usuario
-                .jogos_adquiridos
-                .jogo
-                .categoria`
-            );
+            .modify('getListModifier');
     });
 }
 

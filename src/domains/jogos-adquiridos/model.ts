@@ -63,9 +63,18 @@ class JogoAdquirido extends BaseModel {
             getOneModifier(_builder: AnyQueryBuilder) {
             },
 
-            getListModifier(_builder: AnyQueryBuilder) {
+            getListModifier(builder: AnyQueryBuilder) {
+                builder.withGraphFetched({
+                    usuario: {
+                        jogos_adquiridos: {
+                            jogo: {
+                                categoria: true
+                            },
+                        },
+                    },
+                });
             },
-
+            
             getLoginModifier(_query: AnyQueryBuilder) {
             },
         };
