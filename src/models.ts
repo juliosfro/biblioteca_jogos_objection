@@ -6,7 +6,7 @@ import path from 'path';
 
 dotenv.config();
 
-import { createKnexConfig } from './factories/knex';
+import { createKnexConfig } from '~/factories/knex';
 
 const {
     DB_NAME,
@@ -45,11 +45,9 @@ class BaseModel extends Model {
 
     static get modifiers() {
         return {
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
             getOneModifier(_builder: AnyQueryBuilder) {
             },
 
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
             getListModifier(_builder: AnyQueryBuilder) {
             },
         };
