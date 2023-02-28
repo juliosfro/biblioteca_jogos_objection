@@ -17,6 +17,23 @@ async function create(request: Request, response: Response, next: NextFunction) 
     }
 }
 
+async function update(request: Request, response: Response, next: NextFunction) {
+    try {
+        const { body: payload, params } = request;
+        const id = Number(params.idJogo);
+
+        console.log(`Id do jogo => ${id}`);
+        
+        const jogoAdquirido = await service.update(id, payload);
+        response
+            .status(201)
+            .send(jogoAdquirido);
+
+    } catch (error) {
+        next(error);
+    }
+}
+
 async function getAll(_request: Request, response: Response, next: NextFunction) {
     try {
         const jogosAdquiridos = await service.getAll();
@@ -31,5 +48,6 @@ async function getAll(_request: Request, response: Response, next: NextFunction)
 
 export default {
     create,
+    update,
     getAll
 };

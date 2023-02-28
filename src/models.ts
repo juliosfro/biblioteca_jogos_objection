@@ -13,7 +13,7 @@ const {
     DB_HOST,
     DB_PORT,
     DB_USER,
-    DB_PASS,
+    DB_PASSWORD,
 
     DB_SSL_CA,
     DB_SSL_CERT,
@@ -25,7 +25,7 @@ const knexConfigConnection = {
     host: DB_HOST,
     port: DB_PORT,
     username: DB_USER,
-    password: DB_PASS,
+    password: DB_PASSWORD,
     sslCa: DB_SSL_CA,
     sslCert: DB_SSL_CERT,
     sslKey: DB_SSL_KEY,
