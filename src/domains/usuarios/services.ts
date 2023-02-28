@@ -12,12 +12,7 @@ async function create (payload: CreateUsuario): Promise<Usuario> {
 async function getAll(): Promise<Usuario[]>  {
     return Usuario.transaction(async (transacting) => {
         return await Usuario
-            .query(transacting)
-            .withGraphFetched(
-                `jogos_adquiridos
-                .jogo
-                .categoria`
-            );
+            .query(transacting);
     });
 }
 
