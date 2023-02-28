@@ -44,8 +44,17 @@ async function getAll(): Promise<JogoAdquirido[]> {
     });
 }
 
+async function mostPurchasedGames(): Promise<JogoAdquirido[]> {
+    return JogoAdquirido.transaction(async (transacting) => {
+        return await JogoAdquirido
+            .query(transacting)
+            .modify('getListMostPurchasedGamesModifier');
+    });
+}
+
 export {
     create,
     update,
-    getAll
+    getAll,
+    mostPurchasedGames
 };

@@ -46,8 +46,21 @@ async function getAll(_request: Request, response: Response, next: NextFunction)
     }
 }
 
+async function mostPurchasedGames(_request: Request, response: Response, next: NextFunction) {
+    try {
+        const jogosAdquiridos = await service.mostPurchasedGames();
+        response
+            .status(200)
+            .send(jogosAdquiridos);
+
+    } catch (error) {
+        next(error);
+    }
+}
+
 export default {
     create,
     update,
-    getAll
+    getAll,
+    mostPurchasedGames
 };

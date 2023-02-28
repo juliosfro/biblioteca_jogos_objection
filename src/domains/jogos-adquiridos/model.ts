@@ -64,7 +64,6 @@ class JogoAdquirido extends BaseModel {
             },
 
             getListModifier(builder: AnyQueryBuilder) {
-                builder.distinct('jogos_adquiridos.id_usuario');
                 builder.withGraphFetched({
                     usuario: {
                         jogos_adquiridos: {
@@ -82,6 +81,22 @@ class JogoAdquirido extends BaseModel {
                 
                 builder.whereIn('jogos_adquiridos.id_usuario', knex('usuarios').select('id'));
                 builder.groupBy('jogos_adquiridos.id_usuario');
+            },
+
+            getListMostPurchasedGamesModifier(builder: AnyQueryBuilder) {
+                builder.withGraphFetched({
+                    jogo: {
+                        categoria: true
+                    },
+                });
+
+                builder.select(builderCount => {
+                    builderCount.count('jogos_adquiridos.id_jogo');
+                    builderCount.as('total_jogos_adquiridos');
+                });
+
+                builder.whereIn('jogos_adquiridos.id_jogo', knex('jogos').select('id'));
+                builder.groupBy('jogos_adquiridos.id_jogo');
             },
             
             getLoginModifier(_query: AnyQueryBuilder) {
