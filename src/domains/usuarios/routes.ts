@@ -3,6 +3,7 @@ import usuarioController from '~/domains/usuarios/controllers';
 
 const usuariosRouter = Router();
 
+usuariosRouter.post('/login', usuarioController.login);
 usuariosRouter.post('/cadastro', usuarioController.create);
 usuariosRouter.get('/', usuarioController.getAll);
 usuariosRouter.get('/:id', usuarioController.getById);

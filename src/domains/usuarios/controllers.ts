@@ -1,7 +1,11 @@
 import bcrypt from 'bcryptjs';
 import { NextFunction, Request, Response } from 'express';
+import Usuario from '~/domains/usuarios/model';
 import * as service from '~/domains/usuarios/services';
 import { CreateUsuario } from '~/domains/usuarios/types';
+import { NotFoundError } from '~/helpers/api-errors';
+import { AUTH_ERRORS, NOT_FOUND_ERROR } from '~/helpers/app-messages-errors';
+import { extractUserPayloadAttributes, generateAuthToken } from '~/helpers/auth';
 
 const BCRYPT_SALT_LENGTH = Number(process.env.BCRYPT_SALT_LENGTH);
 
@@ -89,10 +93,40 @@ async function deleteById(request: Request, response: Response, next: NextFuncti
     }
 }
 
+async function login(request: Request, response: Response, next: NextFunction) {
+    try {
+        const { body } = request;
+        const { senha, email } = body;
+
+        const usuario: Usuario = await service.findUserByEmail(email);
+        if (!usuario.id) throw new NotFoundError(NOT_FOUND_ERROR[1]);
+
+        const { senha: senhaHash } = usuario;
+        const isPasswordCorrect = bcrypt.compareSync(senha, senhaHash);
+        if (!isPasswordCorrect) return response.status(409).json({ message: AUTH_ERRORS[1000] });
+
+        const payload = extractUserPayloadAttributes(usuario);
+        const token = generateAuthToken(payload);
+
+        const userWithToken = {
+            ...usuario,
+            token,
+        };
+
+        response
+            .status(200)
+            .json(userWithToken);
+
+    } catch (error) {
+        next(error);
+    }
+}
+
 export default {
     create,
     update,
     getAll,
     getById,
-    deleteById
+    deleteById,
+    login
 };

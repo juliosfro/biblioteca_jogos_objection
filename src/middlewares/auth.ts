@@ -1,9 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
+import Usuario from '~/domains/usuarios/model';
 import { UnauthorizedError } from '~/helpers/api-errors';
 import { extractTokenWithScheme, validateAuthToken } from '~/helpers/auth';
-import { Usuario } from '~/indexes/index-models';
-
-const { sequelize } = Usuario;
 
 export async function generateAuthorizationData(token: string | null) {
     if (!token) {
@@ -11,18 +9,13 @@ export async function generateAuthorizationData(token: string | null) {
     }
 
     const decoded: App.Auth.IJWTUserPayload = validateAuthToken(token);
-    const user = await sequelize?.transaction(async (transaction) => {
-        return await Usuario.findOne({
-            attributes: [
-                'id',
-                'nome',
-                'email',
-                'senha'
-            ],
-            where: { id: decoded.id },
-            transaction,
-            raw: true
-        });
+    const user = await Usuario.transaction(async (transaction) => {
+        return Usuario
+            .query(transaction)
+            .modify('getLoginModifier')
+            .findOne({
+                id: decoded.id 
+            });
     });
 
     if (!user) {

@@ -2,6 +2,7 @@ import { json, urlencoded } from 'body-parser';
 import dotenv from 'dotenv';
 import express, { Application } from 'express';
 import routes from '~/indexes/index-routes';
+import authorizationMiddleware from '~/middlewares/auth';
 
 dotenv.config();
 const port = process.env.APP_PORT;
@@ -13,6 +14,7 @@ app.use(
     urlencoded({ extended: false }),
 );
 
+app.use(authorizationMiddleware);
 app.use(routes);
 
 app.listen(port, () => {

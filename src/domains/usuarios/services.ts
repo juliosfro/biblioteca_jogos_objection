@@ -46,10 +46,22 @@ async function deleteById(id: number): Promise<boolean> {
     return !!deletedUsuarioCount;
 }
 
+async function findUserByEmail(email: string): Promise<Usuario> {
+    return Usuario.transaction(async (transacting) => {
+        return await Usuario
+            .query(transacting)
+            .modify('getLoginModifier')
+            .findOne({
+                email
+            });
+    });
+}
+
 export {
     create,
     update,
     getAll,
     getById,
-    deleteById
+    deleteById,
+    findUserByEmail
 };

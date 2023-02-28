@@ -62,12 +62,17 @@ class Usuario extends BaseModel {
             getListModifier(_builder: AnyQueryBuilder) {
             },
 
-            getLoginModifier(_query: AnyQueryBuilder) {
+            getLoginModifier(builder: AnyQueryBuilder) {
+                builder.select([
+                    'usuarios.id',
+                    'usuarios.nome',
+                    'usuarios.email',
+                    'usuarios.senha',
+                ]);
             },
         };
 
     }
-
 }
 
 export default Usuario;
