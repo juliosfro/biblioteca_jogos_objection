@@ -3,7 +3,7 @@ version: '3.7'
 services:
   mysql:
     image: mysql:8.0
-    container_name: biblioteca_jogos_objection
+    container_name: biblioteca_jogos
     environment:
       MYSQL_DATABASE: $DB_NAME
       MYSQL_ROOT_PASSWORD: $DB_PASSWORD
