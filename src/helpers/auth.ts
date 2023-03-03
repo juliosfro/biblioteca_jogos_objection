@@ -7,7 +7,7 @@ import { pick } from 'lodash';
 import authConfig from '~/config/auth';
 import Usuario from '~/domains/usuarios/model';
 import { ForbiddenError, UnauthorizedError } from '~/helpers/api-errors';
-import { AUTH_ERRORS, UNAUTHORIZED_ERRORS } from '~/helpers/app-messages-errors';
+import { APP_MSG_ERRORS, AUTH_ERRORS } from '~/helpers/app-messages-errors';
 
 export function extractTokenWithScheme(scheme: string, authorization?: string) {
     const [extractedScheme, extractedValue] = authorization?.split(' ') || [];
@@ -49,7 +49,7 @@ export function generateAuthToken(payload?: App.Auth.IJWTUserPayload) {
 
 export function validateAuthToken(token: string | null) {
     if (token === 'undefined' || '' || null) {
-        throw new UnauthorizedError(UNAUTHORIZED_ERRORS[100]);
+        throw new UnauthorizedError(APP_MSG_ERRORS.UNAUTHORIZED_ERRORS[100]);
     }
 
     try {

@@ -1,4 +1,11 @@
-export const ERRORS = {
+const CONSTRAINT_ERRORS = {
+    EMAIL_USUARIOS_UNIQUE_CONSTRAINT: 'usuarios.email_usuarios_unique_constraint',
+    NOME_JOGOS_UNIQUE_CONSTRAINT: 'jogos.nome_jogos_unique_constraint',
+    NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT: 'categoria_jogos.nome_categoria_jogos_unique_constraint',
+    PRIMARY: 'jogos_adquiridos.PRIMARY'
+};
+
+export const DATABASE_ERRORS = {
     ERROR: 'Error',
     SEQUELIZE_DATABASE_ERROR: 'SequelizeDatabaseError',
     SEQUELIZE_UNIQUE_CONSTRAINT_ERROR: 'SequelizeUniqueConstraintError',
@@ -9,15 +16,9 @@ export const ERRORS = {
     PRECONDITION_FAILED_EXCEPTION: 'PreconditionFailedException',
     JSON_WEBTOKEN_ERROR: 'JsonWebTokenError',
     FORBIDDEN_ERROR: 'ForbiddenError',
-    UNIQUE_VIOLATION_ERROR: 'UniqueViolationError'
-};
-
-export const NAME_ERRORS = {
-    EMAIL_USUARIOS_UNIQUE_CONSTRAINT: 'usuarios.email_usuarios_unique_constraint',
-    NOME_JOGOS_UNIQUE_CONSTRAINT: 'jogos.nome_jogos_unique_constraint',
-    NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT: 'categoria_jogos.nome_categoria_jogos_unique_constraint',
-    PRIMARY: 'jogos_adquiridos.PRIMARY',
-    ER_BAD_FIELD_ERROR: 'ER_BAD_FIELD_ERROR'
+    UNIQUE_VIOLATION_ERROR: 'UniqueViolationError',
+    ER_BAD_FIELD_ERROR: 'ER_BAD_FIELD_ERROR',
+    CONSTRAINT_ERRORS
 };
 
 export const AUTH_ERRORS = {
@@ -28,36 +29,47 @@ export const AUTH_ERRORS = {
     1004: 'As credenciais informadas são inválidas. Por favor, tente novamente.',
 };
 
-export const UNAUTHORIZED_ERRORS = {
+const UNAUTHORIZED_ERRORS = {
     100: 'Token inválido.'
 };
 
-export const EMAIL_USUARIOS_UNIQUE_CONSTRAINT = {
+const EMAIL_USUARIOS_UNIQUE_CONSTRAINT = {
     101: 'Esse e-mail já foi cadastrado anteriormente.'
 };
 
-export const NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT = {
+const NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT = {
     101: 'Essa categoria já foi cadastrada anteriormente.'
 };
 
-export const NOME_JOGOS_UNIQUE_CONSTRAINT = {
+const NOME_JOGOS_UNIQUE_CONSTRAINT = {
     101: 'Esse jogo já foi cadastrado anteriormente.'
 };
 
-export const PRIMARY = {
+const PRIMARY = {
     101: 'Esse jogo já foi adquirido.'
 };
 
-export const ER_BAD_FIELD_ERROR = {
+const ER_BAD_FIELD_ERROR = {
     102: 'Parâmetros inválidos.'
 };
 
-export const DEFAULT = {
+const DEFAULT = {
     1: 'Houve um erro ao tentar realizar o cadastro.' 
 };
 
-export const NOT_FOUND_ERROR = {
+const NOT_FOUND_ERROR = {
     1: 'Usuário não encontrado.',
     2: 'Jogo não encontrado.',
     3: 'Categoria não encontrada.'
+};
+
+export const APP_MSG_ERRORS = {
+    EMAIL_USUARIOS_UNIQUE_CONSTRAINT,
+    NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT,
+    NOME_JOGOS_UNIQUE_CONSTRAINT,
+    PRIMARY,
+    ER_BAD_FIELD_ERROR,
+    DEFAULT,
+    NOT_FOUND_ERROR,
+    UNAUTHORIZED_ERRORS
 };
