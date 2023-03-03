@@ -39,14 +39,12 @@ async function getById(id: number): Promise<Jogo> {
     });
 }
 
-async function deleteById(id: number): Promise<boolean> {
-    const deletedJogoCount = Jogo.transaction(async (transacting) => {
+async function deleteById(id: number): Promise<number> {
+    return Jogo.transaction(async (transacting) => {
         return await Jogo
             .query(transacting)
             .deleteById(id);
     });
-
-    return !!deletedJogoCount;
 }
 
 export {

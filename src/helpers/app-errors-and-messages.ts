@@ -4,6 +4,7 @@ const CONSTRAINT_ERRORS = {
     NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT: 'categoria_jogos.nome_categoria_jogos_unique_constraint',
     JOGOS_ID_CATEGORIA_JOGO_FOREIGN: 'jogos_id_categoria_jogo_foreign', 
     JOGOS_ADQUIRIDOS_ID_USUARIO_FOREIGN: 'jogos_adquiridos_id_usuario_foreign',
+    JOGOS_ADQUIRIDOS_ID_JOGO_FOREIGN: 'jogos_adquiridos_id_jogo_foreign',
     PRIMARY: 'jogos_adquiridos.PRIMARY'
 };
 

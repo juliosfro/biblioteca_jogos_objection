@@ -35,14 +35,12 @@ async function update(id: number, payload: Partial<CategoriaJogo>): Promise<Cate
     });
 }
 
-async function deleteById(id: number): Promise<boolean> {
-    const deletedCategoriaJogoCount = CategoriaJogo.transaction(async (transacting) => {
+async function deleteById(id: number): Promise<number> {
+    return CategoriaJogo.transaction(async (transacting) => {
         return await CategoriaJogo
             .query(transacting)
             .deleteById(id);
     });
-
-    return !!deletedCategoriaJogoCount;
 }
 
 export {
