@@ -36,14 +36,12 @@ async function update(id: number, payload: Partial<Usuario>): Promise<Usuario> {
     });
 }
 
-async function deleteById(id: number): Promise<boolean> {
-    const deletedUsuarioCount = Usuario.transaction(async (transacting) => {
+async function deleteById(id: number): Promise<number> {
+    return Usuario.transaction(async (transacting) => {
         return await Usuario
             .query(transacting)
             .deleteById(id);
     });
-
-    return !!deletedUsuarioCount;
 }
 
 async function findUserByEmail(email: string): Promise<Usuario> {
