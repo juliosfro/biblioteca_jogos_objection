@@ -11,18 +11,9 @@ export const errorsMiddleware: ErrorRequestHandler = (
     const { name, message } = error;
     let msg = null;
 
-    if (name === ERRORS.SEQUELIZE_DATABASE_ERROR) {
-        const { parent } = error;
-        const { code } = parent;
-        msg = sendMsgError(code);
-    }
-
-    if (name === ERRORS.SEQUELIZE_UNIQUE_CONSTRAINT_ERROR) {
-        const { errors } = error;
-        const [ firstError ] = errors;
-        const { path } = firstError;
-        const pathString: string = String(path).toUpperCase();
-        msg = sendMsgError(pathString);
+    if (name === ERRORS.UNIQUE_VIOLATION_ERROR) {
+        const { constraint } = error;
+        msg = sendMsgError(constraint);
     }
 
     switch (name) {
@@ -35,14 +26,8 @@ export const errorsMiddleware: ErrorRequestHandler = (
     case ERRORS.CONFLICT_ERROR:
         response.status(409).json({ message });
         break;
-    case ERRORS.SEQUELIZE_UNIQUE_CONSTRAINT_ERROR:
-        response.status(409).json({ message: msg });
-        break;
     case ERRORS.ERROR:
         response.status(409).json({ message });
-        break;
-    case ERRORS.SEQUELIZE_DATABASE_ERROR:
-        response.status(409).json({ message: msg });
         break;
     case ERRORS.UNAUTHORIZED_ERROR:
         response.status(409).json({ message });
@@ -55,6 +40,9 @@ export const errorsMiddleware: ErrorRequestHandler = (
         break;
     case ERRORS.FORBIDDEN_ERROR:
         response.status(403).json({ message });
+        break;
+    case ERRORS.UNIQUE_VIOLATION_ERROR:
+        response.status(409).json({ message: msg });
         break;
     default:
         console.error(error);

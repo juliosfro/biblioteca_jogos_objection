@@ -8,7 +8,16 @@ export const ERRORS = {
     UNAUTHORIZED_ERROR: 'UnauthorizedError',
     PRECONDITION_FAILED_EXCEPTION: 'PreconditionFailedException',
     JSON_WEBTOKEN_ERROR: 'JsonWebTokenError',
-    FORBIDDEN_ERROR: 'ForbiddenError'
+    FORBIDDEN_ERROR: 'ForbiddenError',
+    UNIQUE_VIOLATION_ERROR: 'UniqueViolationError'
+};
+
+export const NAME_ERRORS = {
+    EMAIL_USUARIOS_UNIQUE_CONSTRAINT: 'usuarios.email_usuarios_unique_constraint',
+    NOME_JOGOS_UNIQUE_CONSTRAINT: 'jogos.nome_jogos_unique_constraint',
+    NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT: 'categoria_jogos.nome_categoria_jogos_unique_constraint',
+    PRIMARY: 'jogos_adquiridos.PRIMARY',
+    ER_BAD_FIELD_ERROR: 'ER_BAD_FIELD_ERROR'
 };
 
 export const AUTH_ERRORS = {

@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express, { Application } from 'express';
 import routes from '~/indexes/index-routes';
 import authorizationMiddleware from '~/middlewares/auth';
+import { errorsMiddleware } from '~/middlewares/errors';
 
 dotenv.config();
 const port = process.env.APP_PORT;
@@ -20,3 +21,5 @@ app.use(routes);
 app.listen(port, () => {
     console.log(`Servidor iniciado em: http://localhost:${port}`);
 });
+
+app.use(errorsMiddleware);
