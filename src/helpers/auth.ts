@@ -5,9 +5,9 @@ import jwt, {
 
 import { pick } from 'lodash';
 import authConfig from '~/config/auth';
+import Usuario from '~/domains/usuarios/model';
 import { ForbiddenError, UnauthorizedError } from '~/helpers/api-errors';
 import { AUTH_ERRORS, UNAUTHORIZED_ERRORS } from '~/helpers/app-messages-errors';
-import { Usuario } from '~/indexes/index-models';
 
 export function extractTokenWithScheme(scheme: string, authorization?: string) {
     const [extractedScheme, extractedValue] = authorization?.split(' ') || [];
