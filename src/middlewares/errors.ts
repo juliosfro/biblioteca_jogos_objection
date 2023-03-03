@@ -11,7 +11,9 @@ export const errorsMiddleware: ErrorRequestHandler = (
     const { name, message } = error;
     let msg = null;
 
-    if (name === DATABASE_ERRORS.UNIQUE_VIOLATION_ERROR) {
+    if (name === DATABASE_ERRORS.UNIQUE_VIOLATION_ERROR ||
+        name === DATABASE_ERRORS.FOREIGN_KEY_VIOLATION_ERROR
+    ) {
         const { constraint } = error;
         msg = sendMsgError(constraint);
     }
@@ -42,6 +44,9 @@ export const errorsMiddleware: ErrorRequestHandler = (
         response.status(403).json({ message });
         break;
     case DATABASE_ERRORS.UNIQUE_VIOLATION_ERROR:
+        response.status(409).json({ message: msg });
+        break;
+    case DATABASE_ERRORS.FOREIGN_KEY_VIOLATION_ERROR:
         response.status(409).json({ message: msg });
         break;
     default:

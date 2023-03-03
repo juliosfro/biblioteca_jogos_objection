@@ -2,6 +2,8 @@ const CONSTRAINT_ERRORS = {
     EMAIL_USUARIOS_UNIQUE_CONSTRAINT: 'usuarios.email_usuarios_unique_constraint',
     NOME_JOGOS_UNIQUE_CONSTRAINT: 'jogos.nome_jogos_unique_constraint',
     NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT: 'categoria_jogos.nome_categoria_jogos_unique_constraint',
+    JOGOS_ID_CATEGORIA_JOGO_FOREIGN: 'jogos_id_categoria_jogo_foreign', 
+    JOGOS_ADQUIRIDOS_ID_USUARIO_FOREIGN: 'jogos_adquiridos_id_usuario_foreign',
     PRIMARY: 'jogos_adquiridos.PRIMARY'
 };
 
@@ -18,6 +20,7 @@ const DATABASE_ERRORS = {
     FORBIDDEN_ERROR: 'ForbiddenError',
     UNIQUE_VIOLATION_ERROR: 'UniqueViolationError',
     ER_BAD_FIELD_ERROR: 'ER_BAD_FIELD_ERROR',
+    FOREIGN_KEY_VIOLATION_ERROR: 'ForeignKeyViolationError',
     CONSTRAINT_ERRORS
 };
 
@@ -37,8 +40,9 @@ const EMAIL_USUARIOS_UNIQUE_CONSTRAINT = {
     101: 'Esse e-mail já foi cadastrado anteriormente.'
 };
 
-const NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT = {
-    101: 'Essa categoria já foi cadastrada anteriormente.'
+const CATEGORIA = {
+    101: 'Essa categoria já foi cadastrada anteriormente.',
+    102: 'Categoria inexistente.'
 };
 
 const NOME_JOGOS_UNIQUE_CONSTRAINT = {
@@ -60,13 +64,14 @@ const DEFAULT = {
 const NOT_FOUND_ERROR = {
     1: 'Usuário não encontrado.',
     2: 'Jogo não encontrado.',
-    3: 'Categoria não encontrada.'
+    3: 'Categoria não encontrada.',
+    4: 'Jogo adquirido não encontrado.'
 };
 
 const APP_MSG_ERRORS = {
     AUTH_ERRORS,
     EMAIL_USUARIOS_UNIQUE_CONSTRAINT,
-    NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT,
+    CATEGORIA,
     NOME_JOGOS_UNIQUE_CONSTRAINT,
     PRIMARY,
     ER_BAD_FIELD_ERROR,

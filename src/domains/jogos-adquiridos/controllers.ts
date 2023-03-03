@@ -22,8 +22,6 @@ async function update(request: Request, response: Response, next: NextFunction) 
         const { body: payload, params } = request;
         const id = Number(params.idJogo);
 
-        console.log(`Id do jogo => ${id}`);
-        
         const jogoAdquirido = await service.update(id, payload);
         response
             .status(201)
