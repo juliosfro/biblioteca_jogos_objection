@@ -5,7 +5,7 @@ const CONSTRAINT_ERRORS = {
     PRIMARY: 'jogos_adquiridos.PRIMARY'
 };
 
-export const DATABASE_ERRORS = {
+const DATABASE_ERRORS = {
     ERROR: 'Error',
     SEQUELIZE_DATABASE_ERROR: 'SequelizeDatabaseError',
     SEQUELIZE_UNIQUE_CONSTRAINT_ERROR: 'SequelizeUniqueConstraintError',
@@ -21,7 +21,7 @@ export const DATABASE_ERRORS = {
     CONSTRAINT_ERRORS
 };
 
-export const AUTH_ERRORS = {
+const AUTH_ERRORS = {
     1000: 'Senha incorreta. Por favor, tente novamente.',
     1001: 'Ocorreu um erro ao processar a operação. Por favor, tente novamente mais tarde.',
     1002: 'Não foi possível conectar ao servidor. Verifique sua conexão de rede.',
@@ -63,7 +63,8 @@ const NOT_FOUND_ERROR = {
     3: 'Categoria não encontrada.'
 };
 
-export const APP_MSG_ERRORS = {
+const APP_MSG_ERRORS = {
+    AUTH_ERRORS,
     EMAIL_USUARIOS_UNIQUE_CONSTRAINT,
     NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT,
     NOME_JOGOS_UNIQUE_CONSTRAINT,
@@ -72,4 +73,9 @@ export const APP_MSG_ERRORS = {
     DEFAULT,
     NOT_FOUND_ERROR,
     UNAUTHORIZED_ERRORS
+};
+
+export {
+    APP_MSG_ERRORS,
+    DATABASE_ERRORS
 };

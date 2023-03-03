@@ -1,6 +1,6 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
-import { sendMsgError } from '~/helpers/api-errors';
-import { DATABASE_ERRORS } from '~/helpers/app-messages-errors';
+import { DATABASE_ERRORS } from '~/helpers/app-errors-and-messages';
+import { sendMsgError } from '~/helpers/send-messages-errors';
 
 export const errorsMiddleware: ErrorRequestHandler = (
     error: any,

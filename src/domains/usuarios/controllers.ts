@@ -4,7 +4,7 @@ import Usuario from '~/domains/usuarios/model';
 import * as service from '~/domains/usuarios/services';
 import { CreateUsuario } from '~/domains/usuarios/types';
 import { NotFoundError } from '~/helpers/api-errors';
-import { APP_MSG_ERRORS, AUTH_ERRORS } from '~/helpers/app-messages-errors';
+import { APP_MSG_ERRORS } from '~/helpers/app-errors-and-messages';
 import { extractUserPayloadAttributes, generateAuthToken } from '~/helpers/auth';
 
 const BCRYPT_SALT_LENGTH = Number(process.env.BCRYPT_SALT_LENGTH);
@@ -103,7 +103,7 @@ async function login(request: Request, response: Response, next: NextFunction) {
 
         const { senha: senhaHash } = usuario;
         const isPasswordCorrect = bcrypt.compareSync(senha, senhaHash);
-        if (!isPasswordCorrect) return response.status(409).json({ message: AUTH_ERRORS[1000] });
+        if (!isPasswordCorrect) return response.status(409).json({ message: APP_MSG_ERRORS.AUTH_ERRORS[1000] });
 
         const payload = extractUserPayloadAttributes(usuario);
         const token = generateAuthToken(payload);

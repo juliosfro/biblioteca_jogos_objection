@@ -7,7 +7,7 @@ import { pick } from 'lodash';
 import authConfig from '~/config/auth';
 import Usuario from '~/domains/usuarios/model';
 import { ForbiddenError, UnauthorizedError } from '~/helpers/api-errors';
-import { APP_MSG_ERRORS, AUTH_ERRORS } from '~/helpers/app-messages-errors';
+import { APP_MSG_ERRORS } from '~/helpers/app-errors-and-messages';
 
 export function extractTokenWithScheme(scheme: string, authorization?: string) {
     const [extractedScheme, extractedValue] = authorization?.split(' ') || [];
@@ -41,7 +41,7 @@ export function generateAuthToken(payload?: App.Auth.IJWTUserPayload) {
         return jwt.sign(payload, privateKey, signOptions);
     } catch (error) {
         if (error instanceof JsonWebTokenError) {
-            throw new ForbiddenError(AUTH_ERRORS[1004]);
+            throw new ForbiddenError(APP_MSG_ERRORS.AUTH_ERRORS[1004]);
         }
         throw error;
     }
@@ -59,7 +59,7 @@ export function validateAuthToken(token: string | null) {
         return jwt.verify(token!, authConfig.publicKey, verifyOptions) as App.Auth.IJWTUserPayload;
     } catch (error) {
         if (error instanceof JsonWebTokenError) {
-            throw new ForbiddenError(AUTH_ERRORS[1004]);
+            throw new ForbiddenError(APP_MSG_ERRORS.AUTH_ERRORS[1004]);
         }
         throw error;
     }
