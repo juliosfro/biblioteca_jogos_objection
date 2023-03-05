@@ -1,6 +1,6 @@
+import BaseModel from 'database/config/models';
 import { AnyQueryBuilder, ModelOptions, QueryContext } from 'objection';
 import CategoriaJogo from '~/domains/categoria-jogos/model';
-import BaseModel from '~/models';
 
 class Jogo extends BaseModel {
 
