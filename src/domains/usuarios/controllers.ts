@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import Usuario from '~/domains/usuarios/model';
 import * as service from '~/domains/usuarios/services';
 import { CreateUsuario } from '~/domains/usuarios/types';
-import { NotFoundError } from '~/helpers/api-errors';
+import { NotFoundError } from '~/helpers/api-class-errors';
 import { APP_MSG_ERRORS } from '~/helpers/app-errors-and-messages';
 import { extractUserPayloadAttributes, generateAuthToken } from '~/helpers/auth';
 

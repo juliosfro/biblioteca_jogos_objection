@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import Usuario from '~/domains/usuarios/model';
-import { UnauthorizedError } from '~/helpers/api-errors';
+import { UnauthorizedError } from '~/helpers/api-class-errors';
 import { extractTokenWithScheme, validateAuthToken } from '~/helpers/auth';
 
 export async function generateAuthorizationData(token: string | null) {

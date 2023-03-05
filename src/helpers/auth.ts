@@ -6,7 +6,7 @@ import jwt, {
 import { pick } from 'lodash';
 import authConfig from '~/config/auth';
 import Usuario from '~/domains/usuarios/model';
-import { ForbiddenError, UnauthorizedError } from '~/helpers/api-errors';
+import { ForbiddenError, UnauthorizedError } from '~/helpers/api-class-errors';
 import { APP_MSG_ERRORS } from '~/helpers/app-errors-and-messages';
 
 export function extractTokenWithScheme(scheme: string, authorization?: string) {
