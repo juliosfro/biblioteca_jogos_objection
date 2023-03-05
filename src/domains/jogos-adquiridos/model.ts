@@ -1,5 +1,5 @@
-import BaseModel, { knex } from 'database/config/models';
 import { AnyQueryBuilder, ModelOptions, QueryContext } from 'objection';
+import BaseModel, { knex } from '~/config/models';
 import Jogo from '~/domains/jogos/model';
 import Usuario from '~/domains/usuarios/model';
 

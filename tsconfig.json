@@ -9,12 +9,13 @@
     "outDir": "./build",
     "rootDirs": [
       "./src",
-      "./database"
+      "./database/config"
     ],
     "baseUrl": ".",
     "paths": {
       "~/*": [
-        "./src/*"
+        "./src/*",
+        "./database/*"
       ]
     },
     "typeRoots": [
