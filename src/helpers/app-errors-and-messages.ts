@@ -41,9 +41,8 @@ const EMAIL_USUARIOS_UNIQUE_CONSTRAINT = {
     101: 'Esse e-mail já foi cadastrado anteriormente.'
 };
 
-const CATEGORIA = {
-    101: 'Essa categoria já foi cadastrada anteriormente.',
-    102: 'Categoria inexistente.'
+const NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT = {
+    101: 'Essa categoria já foi cadastrada anteriormente.'
 };
 
 const NOME_JOGOS_UNIQUE_CONSTRAINT = {
@@ -72,7 +71,7 @@ const NOT_FOUND_ERROR = {
 const APP_MSG_ERRORS = {
     AUTH_ERRORS,
     EMAIL_USUARIOS_UNIQUE_CONSTRAINT,
-    CATEGORIA,
+    NOME_CATEGORIA_JOGOS_UNIQUE_CONSTRAINT,
     NOME_JOGOS_UNIQUE_CONSTRAINT,
     PRIMARY,
     ER_BAD_FIELD_ERROR,
