@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { AnyQueryBuilder, ModelOptions, QueryContext } from 'objection';
-import BaseModel from '~/config/models';
 import JogoAdquirido from '~/domains/jogos-adquiridos/model';
+import BaseModel from '../../../database/config/models';
 
 const BCRYPT_SALT_LENGTH = Number(process.env.BCRYPT_SALT_LENGTH);
 

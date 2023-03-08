@@ -43,7 +43,20 @@ function applyFilters(builder: Knex.QueryBuilder, filters: Filter | Filter[]) {
             });
         });
     } else {
-        builder['where']('');
+        Object.keys(filters).forEach((whereKey: string) => {
+            if (allowedWhereMethods.includes(whereKey)) {
+                const value = filters[whereKey]!;
+                if (Array.isArray(value)) {
+                    // ['name', '=', 'joão']
+                    builder[whereKey](...value);
+                } else if (isPlainObject(value)) {
+                    // { where: ['name', '=', 'joão'] }
+                    builder[whereKey]((whereQb: any) => {
+                        applyFilters(whereQb, value);
+                    });
+                }
+            }
+        });
     }
 }
 

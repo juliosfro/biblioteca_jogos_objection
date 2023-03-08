@@ -9,7 +9,7 @@
     "outDir": "./build",
     "rootDirs": [
       "./src",
-      "./database/config"
+      "./database"
     ],
     "baseUrl": ".",
     "paths": {

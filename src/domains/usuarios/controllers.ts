@@ -24,12 +24,41 @@ async function create(request: Request, response: Response, next: NextFunction) 
     }
 }
 
-async function getAll(_request: Request, response: Response, next: NextFunction) {
+async function getAll(request: Request, response: Response, next: NextFunction) {
     try {
-        const usuarios = await service.getAll();
-        response
-            .status(200)
-            .json(usuarios);
+        const { filterBy, orderBy, pagination } = request;
+      
+        const [total, usuarios] = await Usuario.transaction(
+            async transacting => {
+                const usuarioQuery = Usuario.query(transacting);
+
+                if (filterBy) filterBy(usuarioQuery);
+                if (orderBy) orderBy(usuarioQuery);
+
+                const countQuery = usuarioQuery
+                    .resultSize();
+                
+                const resultQuery = usuarioQuery
+                    .limit(pagination!.limit)
+                    .offset(pagination!.offset);
+                
+                return Promise.all([
+                    countQuery,
+                    resultQuery,
+                ]);
+            },
+        );
+       
+        response.status(200).json({
+            metadata: {
+                total,
+                pages: Math.ceil(total / pagination!.limit),
+                page: pagination!.page,
+                limit: pagination!.limit,
+                length: usuarios.length,
+            },
+            usuarios,
+        });
 
     } catch (error) {
         next(error);
