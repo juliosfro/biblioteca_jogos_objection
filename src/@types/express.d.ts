@@ -6,15 +6,13 @@ declare namespace Express {
     }
 
     interface Request {
-        user: App.User.AuthenticatedUser;
-        ability?: import('~/helpers/ability-helper').AppAbility;
+        user: import('~/domains/usuarios/model').default;
+        ability: import('~/helpers/ability').AppAbility;
         files: {
-            // corrige tipagem do multer
-            // https://stackoverflow.com/a/58357812/2826279
             [key: string]: Express.Multer.File[]
         };
-        filterBy?: (queryBuilder: import('typeorm').SelectQueryBuilder<import('typeorm').BaseEntity>) => void;
-        orderBy?: (queryBuilder: import('typeorm').SelectQueryBuilder<import('typeorm').BaseEntity>) => void;
+        filterBy?: (builder: import('Knex').QueryBuilder) => void;
+        orderBy?: (builder: import('Knex').QueryBuilder) => void;
         pagination?: {
             page: number;
             limit: number;
