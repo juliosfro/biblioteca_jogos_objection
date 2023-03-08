@@ -28,7 +28,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "allowJs": false
+    "noUnusedParameters": true
   }
 }
