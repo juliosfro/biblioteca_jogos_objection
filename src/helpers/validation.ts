@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 import defaultJoiConfig from '~/config/joi';
-import UnprocessableEntityError from '~/helpers/http/unprocessable-entity-error';
+import UnprocessableEntityError from '~/helpers/errors/http/unprocessable-entity-error';
 
 type PlainObjectSchema = Record<string, Joi.AnySchema>;
 

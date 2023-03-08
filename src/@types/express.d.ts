@@ -1,24 +1,24 @@
 declare namespace Express {
+    namespace Multer {
+        interface File {
+            dimensions?: import('sharp').Metadata;
+        }
+    }
+
     interface Request {
-        user: import('~/domains/usuarios/types').Usuario;
+        user: App.User.AuthenticatedUser;
         ability?: import('~/helpers/ability-helper').AppAbility;
-        i18n?: import('i18next').i18n
         files: {
             // corrige tipagem do multer
             // https://stackoverflow.com/a/58357812/2826279
             [key: string]: Express.Multer.File[]
         };
-        filterBy?: (queryBuilder: import('knex').QueryBuilder) => void;
-        orderBy?: (queryBuilder: import('knex').QueryBuilder) => void;
-        pagination?: Pagination;
-        accountOwnerUser: import('~/domains/usuarios/types').Usuario;
-        timezone: date;
+        filterBy?: (queryBuilder: import('typeorm').SelectQueryBuilder<import('typeorm').BaseEntity>) => void;
+        orderBy?: (queryBuilder: import('typeorm').SelectQueryBuilder<import('typeorm').BaseEntity>) => void;
+        pagination?: {
+            page: number;
+            limit: number;
+            offset: number;
+        }
     }
-
-    type Pagination = {
-        page: number;
-        limit: number;
-        offset: number;
-        pageSize?: number;
-    };
 }

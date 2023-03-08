@@ -1,5 +1,7 @@
-import { QueryBuilder } from 'knex';
+import Knex from 'knex';
 import isPlainObject from 'lodash/isPlainObject';
+
+// import appConfig from '~/config/app';
 
 const allowedWhereMethods = [
     'where',
@@ -33,7 +35,7 @@ export type Filter = {
 
 export type OrderTuple = [string, string];
 
-function applyFilters(builder: QueryBuilder, filters: Filter | Filter[]) {
+function applyFilters(builder: Knex.QueryBuilder, filters: Filter | Filter[]) {
     if (Array.isArray(filters)) {
         builder.where(qb => {
             filters.forEach(f => {
@@ -41,25 +43,12 @@ function applyFilters(builder: QueryBuilder, filters: Filter | Filter[]) {
             });
         });
     } else {
-        Object.keys(filters).forEach(whereKey => {
-            if (allowedWhereMethods.includes(whereKey)) {
-                const value = filters[whereKey]!;
-                if (Array.isArray(value)) {
-                    // ['name', '=', 'joão']
-                    builder[whereKey](...value);
-                } else if (isPlainObject(value)) {
-                    // { where: ['name', '=', 'joão'] }
-                    builder[whereKey](whereQb => {
-                        applyFilters(whereQb, value);
-                    });
-                }
-            }
-        });
+        builder['where']('');
     }
 }
 
 export function filterBy(requestFilters?: Filter | Filter[]) {
-    return (builder: QueryBuilder) => {
+    return (builder: Knex.QueryBuilder) => {
         if (!requestFilters?.length) {
             return;
         }
@@ -84,7 +73,7 @@ function isValidSortTuple(order: OrderTuple) {
 }
 
 export function orderBy(requestOrders?: OrderTuple[]) {
-    return (builder: QueryBuilder) => {
+    return (builder: Knex.QueryBuilder) => {
         const orders = requestOrders?.filter(isValidSortTuple);
         if (!orders?.length) {
             return;
@@ -104,8 +93,7 @@ export function calculatePaginationAttributes(page?: number, limit?: number) {
         sanitizedPage = page;
     }
 
-    //  let sanitizedLimit = appConfig.pagination.limit;
-    let sanitizedLimit = 1000;
+    let sanitizedLimit = 100;
     if (typeof limit === 'number' && limit > 0) {
         sanitizedLimit = limit;
     }
