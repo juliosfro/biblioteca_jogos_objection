@@ -26,7 +26,7 @@ async function update(id: number, payload: Partial<Jogo>): Promise<Jogo> {
 async function getAll(): Promise<Jogo[]> {
     return Jogo.transaction(async (transacting) => {
         return await Jogo.query(transacting)
-            .withGraphFetched('categoria');
+            .modify('getOneModifier');
     });
 }
 

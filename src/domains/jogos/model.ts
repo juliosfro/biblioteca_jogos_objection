@@ -52,7 +52,12 @@ class Jogo extends BaseModel {
 
     static get modifiers() {
         return {
-            getOneModifier(_builder: AnyQueryBuilder) {
+            getOneModifier(builder: AnyQueryBuilder) {
+                builder.withGraphFetched('categoria');
+
+                builder.modifyGraph('categoria', (categoriaQb: AnyQueryBuilder) => {
+                    categoriaQb.select('id', 'nome');
+                });
             },
 
             getListModifier(_builder: AnyQueryBuilder) {
