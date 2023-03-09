@@ -35,9 +35,9 @@ export type Filter = {
 
 export type OrderTuple = [string, string];
 
-function applyFilters(builder: Knex.QueryBuilder, filters: Filter | Filter[]) {
+function applyFilters(builder: any, filters: Filter | Filter[]) {
     if (Array.isArray(filters)) {
-        builder.where(qb => {
+        builder.where((qb: Knex.QueryBuilder) => {
             filters.forEach(f => {
                 applyFilters(qb, f);
             });
@@ -51,7 +51,7 @@ function applyFilters(builder: Knex.QueryBuilder, filters: Filter | Filter[]) {
                     builder[whereKey](...value);
                 } else if (isPlainObject(value)) {
                     // { where: ['name', '=', 'joão'] }
-                    builder[whereKey]((whereQb: any) => {
+                    builder[whereKey]((whereQb: Knex.QueryBuilder) => {
                         applyFilters(whereQb, value);
                     });
                 }
