@@ -1,4 +1,5 @@
 import { AnyQueryBuilder, ModelOptions, QueryContext } from 'objection';
+import { knex } from '~/../database/config/models';
 import Jogo from '~/domains/jogos/model';
 import Usuario from '~/domains/usuarios/model';
 import BaseModel from '../../../database/config/models';
@@ -79,7 +80,7 @@ class JogoAdquirido extends BaseModel {
                     builderCount.as('total_jogos_adquiridos');
                 });
                 
-                // builder.whereIn('jogos_adquiridos.id_usuario', knex('usuarios').select('id'));
+                builder.whereIn('jogos_adquiridos.id_usuario', knex('usuarios').select('id'));
                 builder.groupBy('jogos_adquiridos.id_usuario');
             },
 
@@ -95,7 +96,7 @@ class JogoAdquirido extends BaseModel {
                     builderCount.as('total_jogos_adquiridos');
                 });
 
-                // builder.whereIn('jogos_adquiridos.id_jogo', knex('jogos').select('id'));
+                builder.whereIn('jogos_adquiridos.id_jogo', knex('jogos').select('id'));
                 builder.groupBy('jogos_adquiridos.id_jogo');
             },
             
