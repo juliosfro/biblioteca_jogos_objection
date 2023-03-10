@@ -25,9 +25,9 @@
     "start": "nodemon -w src -e 'js,jsx,ts,tsx,json,hbs' --exec babel-node --extensions '.js,.jsx,.ts,.tsx' src/index.ts",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
-    "migrate:latest": "babel-node ./node_modules/.bin/knex migrate:latest --knexfile ./database/knexfile.ts",
-    "migrate:make": "knex migrate:make --knexfile ./database/knexfile.ts -x ts",
-    "migrate:rollback": "babel-node ./node_modules/.bin/knex --knexfile ./database/knexfile.ts migrate:rollback"
+    "migrate:latest": "babel-node ./node_modules/.bin/knex migrate:latest --knexfile ./database/config/knexfile.ts",
+    "migrate:make": "knex migrate:make --knexfile ./database/config/knexfile.ts -x ts",
+    "migrate:rollback": "babel-node ./node_modules/.bin/knex --knexfile ./database/config/knexfile.ts migrate:rollback"
   },
   "devDependencies": {
     "@babel/cli": "^7.20.7",

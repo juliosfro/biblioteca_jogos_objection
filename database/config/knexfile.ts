@@ -5,7 +5,7 @@ import Knex from 'knex';
 import path from 'path';
 
 dotenv.config({
-    path: path.resolve(__dirname, '..', '.env'),
+    path: path.resolve(__dirname, '..', '..', '.env'),
 });
 
 const {
@@ -45,12 +45,12 @@ const config: Knex.Config = {
     },
     migrations: {
         tableName: 'knex_migrations',
-        directory: './migrations',
-        stub: './migration.stub',
+        directory: './../migrations',
+        stub: './../migration.stub',
     },
     seeds: {
-        directory: './seeds',
-        stub: './seed.stub',
+        directory: './../seeds',
+        stub: './../seed.stub',
     },
     // Esse parâmetro foi adicionado porque o knex separa a criação da tabela e a criação da primary key em dois
     // comandos, quando se é utilizado uma chave primária que não é "autoincrementavel", por exemplo uma string,
