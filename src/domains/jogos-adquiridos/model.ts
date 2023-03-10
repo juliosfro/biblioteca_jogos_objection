@@ -1,8 +1,7 @@
 import { AnyQueryBuilder, ModelOptions, QueryContext } from 'objection';
-import { knex } from '~/../database/config/models';
+import BaseModel, { knex } from '~/../database/config/models';
 import Jogo from '~/domains/jogos/model';
 import Usuario from '~/domains/usuarios/model';
-import BaseModel from '../../../database/config/models';
 
 class JogoAdquirido extends BaseModel {
 
