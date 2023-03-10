@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import Jogo from '~/domains/jogos/model';
 import * as service from '~/domains/jogos/services';
 import { CreateJogo } from '~/domains/jogos/types';
 
@@ -67,13 +68,43 @@ async function deleteById(request: Request, response: Response, next: NextFuncti
     }
 }
 
-async function getAll(_request: Request, response: Response, next: NextFunction) {
+async function getAll(request: Request, response: Response, next: NextFunction) {
     try {
-        const jogos = await service.getAll();
-        response
-            .status(200)
-            .send(jogos);
-        
+        const { filterBy, orderBy, pagination } = request;
+
+        const [total, jogos] = await Jogo.transaction(
+            async transacting => {
+                const jogoQuery = Jogo.query(transacting)
+                    .modify('getOneModifier');
+
+                if (filterBy) filterBy(jogoQuery);
+                if (orderBy) orderBy(jogoQuery);
+
+                const countQuery = jogoQuery
+                    .resultSize();
+
+                const resultQuery = jogoQuery
+                    .limit(pagination!.limit)
+                    .offset(pagination!.offset);
+
+                return Promise.all([
+                    countQuery,
+                    resultQuery,
+                ]);
+            },
+        );
+
+        response.status(200).json({
+            metadata: {
+                total,
+                pages: Math.ceil(total / pagination!.limit),
+                page: pagination!.page,
+                limit: pagination!.limit,
+                length: jogos.length,
+            },
+            jogos,
+        });
+
     } catch (error) {
         next(error);
     }
