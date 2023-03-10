@@ -1,6 +1,5 @@
 import Knex from 'knex';
 import isPlainObject from 'lodash/isPlainObject';
-
 import appConfig from '~/config/app';
 
 const allowedWhereMethods = [
