@@ -1,7 +1,7 @@
 import Knex from 'knex';
 import isPlainObject from 'lodash/isPlainObject';
 
-// import appConfig from '~/config/app';
+import appConfig from '~/config/app';
 
 const allowedWhereMethods = [
     'where',
@@ -106,7 +106,7 @@ export function calculatePaginationAttributes(page?: number, limit?: number) {
         sanitizedPage = page;
     }
 
-    let sanitizedLimit = 100;
+    let sanitizedLimit = appConfig.pagination.limit;
     if (typeof limit === 'number' && limit > 0) {
         sanitizedLimit = limit;
     }
