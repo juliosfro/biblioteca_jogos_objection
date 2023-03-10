@@ -53,6 +53,10 @@ class Jogo extends BaseModel {
     static get modifiers() {
         return {
             getOneModifier(builder: AnyQueryBuilder) {
+                /**
+                 * Para pesquisar por categoria atraves de query params eh necessario declarar a juncao por join.
+                 */
+                builder.join('categoria_jogos', 'categoria_jogos.id', 'jogos.id_categoria_jogo');
                 builder.withGraphFetched('categoria');
 
                 builder.modifyGraph('categoria', (categoriaQb: AnyQueryBuilder) => {
