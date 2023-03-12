@@ -122,6 +122,21 @@ async function deleteById(request: Request, response: Response, next: NextFuncti
     }
 }
 
+async function refresh(request: Request, response: Response, next: NextFunction) {
+    try {
+        const { user } = request;
+        const payload = extractUserPayloadAttributes(user);
+        const token = generateAuthToken(payload);
+
+        response.json({
+            token,
+            user,
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
 async function login(request: Request, response: Response, next: NextFunction) {
     try {
         const { body } = request;
@@ -157,5 +172,6 @@ export default {
     getAll,
     getById,
     deleteById,
+    refresh,
     login
 };
