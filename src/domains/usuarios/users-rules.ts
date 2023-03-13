@@ -3,7 +3,7 @@ import Usuario, { TipoUsuario } from './model';
 function getAdministratorUserRules(usuario: Usuario): App.Permission.AbilityRule[] {
     return [
         {
-            action: ['find'],
+            action: ['create','read', 'find', 'update', 'delete'],
             subject: Usuario.name,
             permissions: [
                 usuario.perm_gerenciar_usuarios!,
