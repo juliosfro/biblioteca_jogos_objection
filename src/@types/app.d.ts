@@ -30,6 +30,21 @@ declare namespace App {
         };
     }
 
+    declare namespace Permission {
+        type Action = 'menu' | 'manage' | 'create' | 'update' | 'read' | 'find' | 'delete' | 'capture' | 'refund';
+
+        type Subject = import('objection').Model | string | {
+            [key: string]: any;
+            modelName: string;
+        };
+
+        type PermissionFunc = (user: import('~/domains/usuarios/model').default) => boolean;
+
+        type AbilityRule = import('@casl/ability').RawRuleOf<import('~/helpers/ability').AppAbility> & {
+            permissions?: Array<import('~/domains/usuarios/model').TipoUsuario | PermissionFunc | boolean>;
+        };
+    }
+
     type FilterOrderQuery = {
         filters: import('~/helpers/request-query').Filter[],
         orders: import('~/helpers/request-query').OrderTuple[],

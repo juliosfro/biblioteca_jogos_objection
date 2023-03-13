@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import Usuario from '~/domains/usuarios/model';
+import { createAbility } from '~/helpers/ability';
 import { UnauthorizedError } from '~/helpers/api-class-errors';
 import { extractTokenWithScheme, validateAuthToken } from '~/helpers/auth';
 
@@ -14,15 +15,16 @@ export async function generateAuthorizationData(token: string | null) {
             .query(transaction)
             .modify('getLoginModifier')
             .findOne({
-                id: decoded.id 
+                id: decoded.id
             });
     });
 
     if (!user) {
-        throw new UnauthorizedError('Usuário não autenticado.');
+        throw new UnauthorizedError('Usuário não encontrado.');
     }
 
-    return { user };
+    const ability = createAbility(user);
+    return { user, ability };
 }
 
 async function authorizationMiddleware(request: Request, _response: Response, next: NextFunction) {
@@ -39,9 +41,10 @@ async function authorizationMiddleware(request: Request, _response: Response, ne
         }
 
         const token = extractTokenWithScheme('Bearer', authorization); 
-        const { user } = await generateAuthorizationData(token);
-
+        const { user, ability } = await generateAuthorizationData(token);
+        
         request.user = user;
+        request.ability = ability;
         next();
 
     } catch (err) {

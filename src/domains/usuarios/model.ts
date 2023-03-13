@@ -5,6 +5,11 @@ import JogoAdquirido from '~/domains/jogos-adquiridos/model';
 
 const BCRYPT_SALT_LENGTH = Number(process.env.BCRYPT_SALT_LENGTH);
 
+export enum TipoUsuario {
+    ADMINISTRADOR = 'ADMINISTRADOR',
+    CLIENTE = 'CLIENTE',
+}
+
 class Usuario extends BaseModel {
 
     static get tableName() {
@@ -15,12 +20,13 @@ class Usuario extends BaseModel {
         return 'id';
     }
 
-    public id!: number;
-    public nome!: string;
-    public email!: string;
-    public senha!: string;
-    public created_at?: Date;
-    public updated_at?: Date;
+    id!: number;
+    nome!: string;
+    email!: string;
+    senha!: string;
+    created_at?: Date;
+    updated_at?: Date;
+    tipo!: TipoUsuario;
 
     get $hiddenFields() {
         return [
@@ -73,6 +79,11 @@ class Usuario extends BaseModel {
         };
 
     }
+
+    hasRole(role: TipoUsuario) {
+        return this.tipo === role;
+    }
+
 }
 
 export default Usuario;
