@@ -73,14 +73,24 @@ async function getAll(request: Request, response: Response, next: NextFunction) 
 
 async function getById(request: Request, response: Response, next: NextFunction) {
     try {
-        const { params } = request;
+        const { params, ability } = request;
         const { id } = params;
         const usuarioId = Number(id);
 
-        const usuario = await service.getById(usuarioId);
+        const usuarioCurrent = await service.getById(usuarioId);
+
+        const abilitySubject = {
+            ...usuarioCurrent,
+            modelName: 'Usuario'
+        };
+        
+        ForbiddenError
+            .from(ability)
+            .throwUnlessCan('read', abilitySubject);
+
         response
             .status(200)
-            .json(usuario);
+            .json(usuarioCurrent);
 
     } catch (error) {
         next(error);
@@ -89,11 +99,22 @@ async function getById(request: Request, response: Response, next: NextFunction)
 
 async function update(request: Request, response: Response, next: NextFunction) {
     try {
-        const { body, params } = request;
+        const { body, params, ability } = request;
         const { id } = params;
         const payload = body;
         const { senha } = payload;
         const idUsuario = Number(id);
+
+        const usuarioCurrent = await service.getById(idUsuario);
+
+        const abilitySubject = {
+            ...usuarioCurrent,
+            modelName: 'Usuario'
+        };
+
+        ForbiddenError
+            .from(ability)
+            .throwUnlessCan('update', abilitySubject);
 
         const senhaCriptografada = bcrypt.hashSync(senha, BCRYPT_SALT_LENGTH);
 

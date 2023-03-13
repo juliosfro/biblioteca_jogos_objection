@@ -12,8 +12,16 @@ function getAdministratorUserRules(usuario: Usuario): App.Permission.AbilityRule
     ];
 }
 
-function getClientUserRules(_usuario: Usuario): App.Permission.AbilityRule[] {
-    return [];
+function getClientUserRules(usuario: Usuario): App.Permission.AbilityRule[] {
+    return [
+        {
+            action: ['read', 'update'],
+            subject: Usuario.name,
+            conditions: {
+                id: usuario?.id,
+            },
+        },
+    ];
 }
 
 export function createUserRules(user: Usuario): App.Permission.AbilityRule[] {
