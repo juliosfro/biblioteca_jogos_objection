@@ -1,11 +1,11 @@
 export type CreateUsuario = {
-    id: number;
-    nome: string;
-    email: string;
-    senha: string;
-    createdAt?: Date;
-    updatedAt?: Date;
-    deletedAt?: Date;
+    id: number
+    nome: string
+    email: string
+    senha: string
+    createdAt?: Date
+    updatedAt?: Date
+    deletedAt?: Date
 };
 
 export type FilterUsuario = {
@@ -19,12 +19,12 @@ type ListFilters = {
 }
 
 export type Usuarios = {
-    id: number;
-    nome: string;
-    email: string,
-    createdAt?: Date;
-    updatedAt?: Date;
-    deletedAt?: Date;
+    id: number
+    nome: string
+    email: string
+    createdAt?: Date
+    updatedAt?: Date
+    deletedAt?: Date
 }
 
 export interface GetAllUsuariosFilters extends ListFilters {

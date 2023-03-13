@@ -1,9 +1,9 @@
 export type CreateCategoriaJogo = {
-    id: number;
-    nome: string;
-    createdAt?: Date;
-    updatedAt?: Date;
-    deletedAt?: Date;
+    id: number
+    nome: string
+    createdAt?: Date
+    updatedAt?: Date
+    deletedAt?: Date
 }
 
 export type FilterCategoriaJogo = {
@@ -16,11 +16,11 @@ type ListFilters = {
 }
 
 export type CategoriaJogo = {
-    id: number;
-    nome: string;
-    createdAt?: Date;
-    updatedAt?: Date;
-    deletedAt?: Date;
+    id: number
+    nome: string
+    createdAt?: Date
+    updatedAt?: Date
+    deletedAt?: Date
 }
 
 export type GetAllCategoriaJogosFilters = ListFilters
