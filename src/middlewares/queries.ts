@@ -30,7 +30,6 @@ function filtersOrdersMiddleware(request: FiltersOrdersRequest, _: Response, nex
     const { orders, filters } = request.query;
 
     if (filters?.length) {
-        console.log('bacana');
         request.filterBy = filterBy(filters);
     } else {
         request.filterBy = () => null;

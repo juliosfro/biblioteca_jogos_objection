@@ -1,3 +1,4 @@
+import { ForbiddenError } from '@casl/ability';
 import bcrypt from 'bcryptjs';
 import { NextFunction, Request, Response } from 'express';
 import Usuario from '~/domains/usuarios/model';
@@ -26,7 +27,12 @@ async function create(request: Request, response: Response, next: NextFunction) 
 
 async function getAll(request: Request, response: Response, next: NextFunction) {
     try {
-        const { filterBy, orderBy, pagination } = request;
+        const {
+            filterBy, orderBy,
+            pagination, ability
+        } = request;
+
+        ForbiddenError.from(ability!).throwUnlessCan('find', 'Usuario');
       
         const [total, usuarios] = await Usuario.transaction(
             async transacting => {

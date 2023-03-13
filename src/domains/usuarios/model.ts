@@ -27,6 +27,7 @@ class Usuario extends BaseModel {
     created_at?: Date;
     updated_at?: Date;
     tipo!: TipoUsuario;
+    perm_gerenciar_usuarios?: boolean;
 
     get $hiddenFields() {
         return [
@@ -34,6 +35,7 @@ class Usuario extends BaseModel {
             'created_at',
             'updated_at',
             'deleted_at',
+            'perm_gerenciar_usuarios'
         ];
     }
 
@@ -74,6 +76,8 @@ class Usuario extends BaseModel {
                     'usuarios.nome',
                     'usuarios.email',
                     'usuarios.senha',
+                    'usuarios.tipo',
+                    'usuarios.perm_gerenciar_usuarios'
                 ]);
             },
         };

@@ -1,7 +1,15 @@
 import Usuario, { TipoUsuario } from './model';
 
-function getAdministratorUserRules(_: unknown): App.Permission.AbilityRule[] {
-    return [];
+function getAdministratorUserRules(usuario: Usuario): App.Permission.AbilityRule[] {
+    return [
+        {
+            action: ['find'],
+            subject: Usuario.name,
+            permissions: [
+                usuario.perm_gerenciar_usuarios!,
+            ],
+        },
+    ];
 }
 
 function getClientUserRules(_usuario: Usuario): App.Permission.AbilityRule[] {
